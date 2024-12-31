@@ -23,7 +23,8 @@ CXXFLAGS += -std=c++14 -Wall -Wno-unused-variable
 VERILATOR = verilator --cc --exe
 VERILATOR_FLAGS = --assert -Wno-STMTDLY -O3 --trace --threads $(threads)\
 	--top-module Tile -Mdir $(gen_dir)/VTile.csrc \
-	-CFLAGS "$(CXXFLAGS) -include $(gen_dir)/VTile.csrc/VTile.h" 
+	-CFLAGS "$(CXXFLAGS) -include $(gen_dir)/VTile.csrc/VTile.h" \
+	--trace-underscore # make sure the private signals are traced
 
 $(base_dir)/VTile: $(gen_dir)/Tile.sv $(src_dir)/cc/top.cc $(src_dir)/cc/mm.cc $(src_dir)/cc/mm.h
 	$(VERILATOR) $(VERILATOR_FLAGS) -o $@ $< $(word 2, $^) $(word 3, $^)
