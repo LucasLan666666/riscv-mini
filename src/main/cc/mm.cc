@@ -11,7 +11,7 @@
 mm_magic_t::mm_magic_t(size_t size, size_t word_size):
   data(new char[size]),
   size(size),
-  word_size(word_size), 
+  word_size(word_size),
   store_inflight(false)
 {
   dummy_data.resize(word_size);

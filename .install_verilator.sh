@@ -1,6 +1,6 @@
 set -e
 # Install Verilator (http://www.veripool.org/projects/verilator/wiki/Installing)
-if [ ! -f $INSTALL_DIR/bin/verilator ]; then 
+if [ ! -f $INSTALL_DIR/bin/verilator ]; then
   mkdir -p $INSTALL_DIR
   git clone https://git.veripool.org/git/verilator
   unset VERILATOR_ROOT

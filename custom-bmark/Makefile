@@ -18,7 +18,7 @@ RISCV_CFLAGS  = -static -std=gnu99 -fno-common -fno-builtin-printf \
 RISCV_LDFLAGS = -T $(RISCV_TEST_DIR)/benchmarks/common/test.ld \
 	-I$(RISCV_TEST_DIR)/env -I$(RISCV_TEST_DIR)/benchmarks/common
 
-VPATH += $(RISCV_TEST_DIR)/benchmarks/common 
+VPATH += $(RISCV_TEST_DIR)/benchmarks/common
 
 all: $(CUSTOM_BMARK_BIN) $(CUSTOM_BMARK_BIN).hex $(CUSTOM_BMARK_BIN).dump
 

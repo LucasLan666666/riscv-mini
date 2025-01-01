@@ -69,7 +69,7 @@ void tick() {
     top->io_nasti_r_ready,
     top->io_nasti_b_ready
   );
-  
+
   top->clock = 0;
   top->eval();
 #if VM_TRACE
@@ -138,4 +138,3 @@ int main(int argc, char** argv) {
 
   return retcode == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
-
