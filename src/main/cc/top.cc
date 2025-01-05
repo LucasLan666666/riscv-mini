@@ -2,7 +2,7 @@
 #include <iostream>
 
 #if VM_TRACE
-# include <verilated_vcd_c.h>	// Trace file format header
+# include <verilated_fst_c.h>	// Trace file format header
 #endif
 
 #include "mm.h"
@@ -20,11 +20,11 @@ double sc_time_stamp () { // Called by $time in Verilog
 
 VTile* top; // target design
 #ifdef VM_TRACE
-VerilatedVcdC* tfp;
+VerilatedFstC* tfp;
 #endif
 mm_magic_t* mem; // target memory
 
-// TODO Provide command-line options like vcd filename, timeout count, etc.
+// TODO Provide command-line options likfst filename, timeout count, etc.
 const long timeout = 100000000L;
 
 void tick() {
@@ -87,9 +87,9 @@ int main(int argc, char** argv) {
 #if VM_TRACE			// If verilator was invoked with --trace
   Verilated::traceEverOn(true);	// Verilator must compute traced signals
   VL_PRINTF("Enabling waves...\n");
-  tfp = new VerilatedVcdC;
+  tfp = new VerilatedFstC;
   top->trace(tfp, 99);	// Trace 99 levels of hierarchy
-  tfp->open(argc > 2 ? argv[2] : "dump.vcd"); // Open the dump file
+  tfp->open(argc > 2 ? argv[2] : "dump.fst"); // Open the dump file
 #endif
 
   cout << "Starting simulation!\n";

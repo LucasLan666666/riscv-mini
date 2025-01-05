@@ -24,6 +24,7 @@ VERILATOR = verilator --cc --exe
 VERILATOR_FLAGS = --assert -Wno-STMTDLY -O3 --trace --threads $(threads)\
 	--top-module Tile -Mdir $(gen_dir)/VTile.csrc \
 	-CFLAGS "$(CXXFLAGS) -include $(gen_dir)/VTile.csrc/VTile.h" \
+	--trace-fst \
 	--trace-underscore # make sure the private signals are traced
 
 $(base_dir)/VTile: $(gen_dir)/Tile.sv $(src_dir)/cc/top.cc $(src_dir)/cc/mm.cc $(src_dir)/cc/mm.h
@@ -38,7 +39,7 @@ test_out_files = $(foreach f,$(test_hex_files),$(patsubst %.hex,%.out,$(out_dir)
 
 $(test_out_files): $(out_dir)/%.out: $(base_dir)/VTile $(base_dir)/tests/%.hex
 	mkdir -p $(out_dir)
-	$^ $(patsubst %.out,%.vcd,$@) 2> $@
+	$^ $(patsubst %.out,%.fst,$@) 2> $@
 
 run-tests: $(test_out_files)
 
@@ -50,7 +51,7 @@ $(custom_bmark_hex):
 
 $(custom_bmark_out): $(base_dir)/VTile $(custom_bmark_hex)
 	mkdir -p $(out_dir)
-	$^ $(patsubst %.out,%.vcd,$@) 2> $@
+	$^ $(patsubst %.out,%.fst,$@) 2> $@
 
 run-custom-bmark: $(custom_bmark_out)
 
